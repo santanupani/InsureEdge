@@ -286,6 +286,8 @@ manager.controller('claimRequestCtrl', function ($scope, $rootScope, $http, $rou
 		$scope.claimNumber = $routeParams.claimNumber;
 		$scope.showModal = false;
 		$scope.getAllClaimRequest();
+		$scope.getAllReleaseFormData($scope.claimNumber);
+		$scope.viewreleaseFormPDF($scope.claimNumber);
 
 	};
 
@@ -329,6 +331,50 @@ manager.controller('claimRequestCtrl', function ($scope, $rootScope, $http, $rou
 			});
 		}
 	};
+	
+	$scope.getAllReleaseFormData = function (claimNumber) {	
+		$http({			
+			url: '/api/getReleaseFormData/' + claimNumber,			
+			method: 'get'
+		}).success(function (data, status) {
+			if (status == 200) {
+				console.log('ReleaseForm Request retrived sucessfully');
+				$rootScope.releaseForm = data;
+				
+			} else {
+				console.log('status:' + status);
+				$rootScope.error = "error status code : " + status;
+			}
+		}).error(function (error) {
+			console.log(error);
+			$rootScope.error = error;
+		});
+	};
+	
+	$scope.viewreleaseFormPDF = function (claimNumber) {
+        console.log('ClaimNumber No: ' + claimNumber);
+        $http({
+            url: '/api/release-form-pdf/' + claimNumber,
+            responseType: 'arraybuffer',
+            headers: {'Accept': 'application/pdf'},
+            method: 'get'
+        }).success(function (data, status) {
+            if (status == 200) {
+                console.log('Retrieving ReleaseForm PDF');
+                console.log('Retrieving Dada'+data );
+                var file = new Blob([data], {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                $scope.releaseFormPDF = $sce.trustAsResourceUrl(fileURL);
+            } else {
+                console.log('status:' + status);
+                $scope.error = "error status code : " + status;
+            }
+        }).error(function (error) {
+            console.log(error);
+            $rootScope.error = error;
+        });
+
+    };
 
 
 	$scope.getClaimRequest = function (claimNumber) {

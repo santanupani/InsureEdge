@@ -359,6 +359,24 @@
                                                                               ng-model="claimQuestionnaire.answer" readonly="readonly"></textarea>
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group">
+																<label class="control-label" for="policyNumber">Policy Number</label>
+																<input type="text" class="form-control" ng-model="claimRequest.policy.reference" readonly>
+															</div>
+															<div class="form-group">
+																<label class="control-label" for="lessExcess">Less Excess</label>
+																	<div class="input-group">
+																		<span class="input-group-addon">R</span>
+																			<input type="text" class="form-control" ng-model="releaseForm.lessExcess" readonly>
+																	</div>
+															</div>
+															<div class="form-group">
+																<label class="control-label" for="totalPayable">Total Payable To Insured</label>
+																	<div class="input-group">
+																		<span class="input-group-addon">R</span>
+																			<input type="text" class="form-control" ng-model="releaseForm.totalPayeble" readonly>
+																	</div>
+															</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -366,6 +384,31 @@
                                             </div>
 
                                         </div>
+                                        <div class="panel panel-default" ng-if="releaseFormPDF">
+
+                        					<div class="panel-heading">
+
+                            					<h4 class="panel-title">
+
+                                					<a data-toggle="collapse" data-parent="#accordion"
+                                   								href="/#collapseFive">ReleaseForm Preview</a>
+
+                            					</h4>
+
+                        					</div>
+
+                        					<div id="collapseFive" class="panel-collapse collapse">
+
+                            					<div class="panel-body">
+
+                                					<div class="modal-content">
+                                   						<object data="{{releaseFormPDF}}"
+                                            				style="width: 100%; height: 700px"></object>
+                                					</div>
+                            					</div>
+                        					</div>
+
+                    					</div>
                                     </div>
 
                                 </div>

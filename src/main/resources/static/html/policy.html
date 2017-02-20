@@ -49,8 +49,7 @@
 												<label>Collect By Debit Order</label>
 											</div>
 											<div class="form-group form-inline">
-												<input type="checkbox" class="form-control" readonly
-													ng-model="policy.excludeSasria" /> <label>Exclude
+												<input type="checkbox" class="form-control" ng-model="policy.excludeSasria" /> <label>Exclude
 													Sasria</label>
 											</div>
 										</div>
@@ -258,7 +257,7 @@
 															class="form-control" ng-model="policy.subjectMatter"
 															readonly>
 													</div>
-													<div class="form-group">
+													<div class="form-group" ng-if="policyRequest.quotation.quotationRequest.product.id != 5">
 														<label>Excess Structure:</label>
 														</h4>
 														<input type="text" class="form-control"
@@ -279,7 +278,7 @@
 
 										</div>
 
-										<div class="panel panel-default">
+										<div class="panel panel-default" ng-if="policyRequest.quotation.quotationRequest.product.id != 5">
 
 											<div class="panel-heading">
 
@@ -330,6 +329,50 @@
 																	ng-model="indemnity.pavement" ng-readonly="isUpdate"></td>
 																<td><input type="text" class="form-control"
 																	ng-model="indemnity.premium" ng-readonly="isUpdate"></td>
+															</tr>
+														</tbody>
+													</table>
+
+													<div class="pull-right" ng-if="policyScheduleContent">
+														<a ng-href="#" role="link">Add Indemnity</a>
+													</div>
+
+												</div>
+
+											</div>
+
+										</div>
+										<div class="panel panel-default" ng-if="policyRequest.quotation.quotationRequest.product.id == 5">
+
+											<div class="panel-heading">
+
+												<h4 class="panel-title">
+
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="/#collapseTwo">Limit of Indemnity</a>
+
+												</h4>
+
+											</div>
+
+											<div id="collapseTwo" class="panel-collapse collapse">
+
+												<div class="panel-body">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>Indemnity Option</th>
+																<th>Indemnity Value</th>
+																<th>Sum Insured</th>																
+																<th>Premium</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr ng-repeat="indemnity in policy.indemnityOption">
+																<td><input type="text" class="form-control" ng-model="indemnity.indemnityItemOption" ng-readonly="isUpdate"></td>
+																<td><textarea class="form-control" ng-model="indemnity.indemnityValue" ng-readonly="isUpdate"></textarea></td>
+																<td><input type="text" class="form-control" ng-model="indemnity.sumInsured" readonly></td>																
+																<td><input type="text" class="form-control" ng-model="indemnity.premium" ng-readonly="isUpdate"></td>
 															</tr>
 														</tbody>
 													</table>

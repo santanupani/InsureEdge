@@ -146,6 +146,11 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
     $scope.com;
     $scope.questionnairres = [];
     $scope.updateQuotation;
+    $scope.cover;
+   
+   
+    
+
 
 
     $scope.init = function () {
@@ -164,10 +169,11 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
             url: '/api/quotation-requests/' + $scope.reference,
             method: 'get'
         }).
-                success(function (data, status) {
-                    console.log('get success code::' + status);
+        		success(function (data, status) {
+                    console.log('get success code1::' + status);
                     if (status == 200) {
-                        $scope.quotationRequest = data;
+                        $scope.quotationRequest = data; 
+                        
                         $scope.questionnairres = $scope.quotationRequest.questionnaire;
 
                         for (var i = 0; i < $scope.quotationRequest.questionnaire.length; i++) {
@@ -180,11 +186,17 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
                                 console.log($scope.quotationRequest.questionnaire[i].answer);
                             }
                         }
-
-                        angular.forEach($scope.quotationRequest.locationOptions, function (locationOption) {
+                        
+                        if($scope.quotationRequest.product.id != 5){
+                        	console.log('I am here for Product 1-4');
+                        	angular.forEach($scope.quotationRequest.locationOptions, function (locationOption) {
                             locationOption.cover = 'Fire, Accidental damage, Hijacking, Theft & Armed Robbery - as per standard policy wording.';
                             locationOption.excess = 'R Nil';
                         });
+                        }else if($scope.quotationRequest.product.id == 5){
+                        	$scope.cover = 'Fire, Accidental damage, Hijacking, Theft & Armed Robbery - as per standard policy wording.';                        	                       
+                        	console.log('I am here for Product 5');
+                        }
                         console.log('Quotation Request Detail::' + $scope.quotationRequest);
                         console.log('Questionairres Detail::' + $scope.questionnairres);
                     } else {
@@ -230,7 +242,7 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
         $scope.mode = mode;
     };
 
-    $scope.viewQuotationPDF = function (reference) {
+    $scope.viewUpdateQuotationPDF = function (reference) {
         console.log('Ref: ' + reference);
         $http({
             url: '/api/quotation-request-pdf/' + reference,
@@ -239,7 +251,9 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
             method: 'get'
         }).success(function (data, status) {
             if (status == 200) {
-                console.log('Retrieving Quotation PDF');
+            	
+            	console.log('Retrieving Quotation PDF data1'+ data);
+                console.log('Retrieving Quotation PDF1');
                 var file = new Blob([data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 $scope.quotationPDF = $sce.trustAsResourceUrl(fileURL);
@@ -260,8 +274,13 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
         if (form.$invalid) {
             console.log("Form Validation Failure");
         } else {
+        	if($scope.quotationRequest.product.id !=5){
+        	
+        	console.log("I am here at Product 1-4")
+        		
             $scope.quotation.reference = $scope.reference;
-            $scope.quotation.note = $scope.quotationRequest.note;
+            $scope.quotation.note = $scope.quotationRequest.note;                   
+           
 
             console.log("Ref Test : " + $scope.reference);
             for (var i = 0; i < $scope.quotationRequest.locationOptions.length; i++) {
@@ -281,8 +300,6 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
                 }
 
             }
-            ;
-
             console.log($scope.quotation);
             $http({
                 url: '/api/quotations',
@@ -294,8 +311,9 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
             }).success(function (data, status) {
                 console.log('get success CODE:' + status);
                 if (status === 200) {
-                    console.log('All the data are saved in quotationOptions and quotation table');
-	
+
+
+                	
 //					$scope.init();
 					$rootScope.message = "Quotation Request Accepted Successfully";
 //					$scope.mode = undefined;
@@ -308,7 +326,45 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
 			}).error(function (error) {
 				$rootScope.message = "Oops, we received your request, but there was an error processing it";
 			});
-		}
+        	
+        	} else if($scope.quotationRequest.product.id ==5){
+        		
+        		
+        		console.log("I am here in Product 5");
+        		
+        		$scope.quotation.reference = $scope.reference;                
+                $scope.quotation.cover = $scope.cover;
+                $scope.quotation.premium = $scope.quotationRequest.premium;
+                
+              
+                console.log($scope.quotation);
+                
+                $http({
+                    url: '/api/quotations',
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: $scope.quotation
+                }).success(function (data, status) {
+                    console.log('get success CODE:' + status);
+                    if (status === 200) {                   	
+
+    					$rootScope.message = "Quotation Request Accepted Successfully";
+
+    					$scope.isQuotationCreated = false;
+    					$scope.viewQuotationPDF($scope.quotation.reference);
+
+    				} else {
+    					console.log('status:' + status);
+    				}
+    			}).error(function (error) {
+    				$rootScope.message = "Oops, we received your request, but there was an error processing it";
+    			});
+        	}
+        
+        }
+      
 	};
 
 
@@ -342,7 +398,7 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
 			console.log('get success code:' + status);
 			if (status == 200) {
 				$rootScope.message = "Quotation updated Successfully";
-				$scope.viewQuotationPDF($scope.updateQuotation.reference);
+				$scope.viewUpdateQuotationPDF($scope.updateQuotation.reference);
 			} else {
 				console.log('status:' + status);
 			}
@@ -353,43 +409,6 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
 		});
 	};
 
-
-	$scope.getQuotationRequest = function () {
-		$http({
-			url: '/api/quotation-requests/' + $scope.reference,
-			method: 'get'
-		}).
-		success(function (data, status) {
-			console.log('get success code::' + status);
-			if (status == 200) {
-				$scope.quotationRequest = data;
-				$scope.questionnairres = $scope.quotationRequest.questionnaire;
-
-				for (var i = 0; i < $scope.quotationRequest.questionnaire.length; i++) {
-
-					if (angular.equals($scope.quotationRequest.questionnaire[i].answer, 'true')) {
-						$scope.quotationRequest.questionnaire[i].answer = 'Yes';
-						console.log($scope.quotationRequest.questionnaire[i].answer);
-					} else if (angular.equals($scope.quotationRequest.questionnaire[i].answer, 'false')) {
-						$scope.quotationRequest.questionnaire[i].answer = 'No';
-						console.log($scope.quotationRequest.questionnaire[i].answer);
-					}
-				}
-
-				angular.forEach($scope.quotationRequest.locationOptions, function (locationOption) {
-					locationOption.cover = 'Fire, Accidental damage, Hijacking, Theft & Armed Robbery - as per standard policy wording.';
-					locationOption.excess = 'R Nil';
-				});
-				console.log('Quotation Request Detail::' + $scope.quotationRequest);
-				console.log('Questionairres Detail::' + $scope.questionnairres);
-			} else {
-				console.log('status:' + status);
-			}
-		})
-		.error(function (error) {
-			console.log(error);
-		});
-	};
 
 	$scope.rejectQuotationRequest = function (rejectform) {
 		if (rejectform.$invalid) {
@@ -425,6 +444,8 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
 		$scope.mode = mode;
 	};
 
+	
+	//Call for create new Quotation
 	$scope.viewQuotationPDF = function (reference) {
 		console.log('Ref: ' + reference);
 		$http({
@@ -433,7 +454,9 @@ broker.controller('quotationRequestsCtrl', function ($scope, $routeParams, $http
 			headers: {'Accept': 'application/pdf'},
 			method: 'get'
 		}).success(function (data, status) {
+			
 			if (status == 200) {
+				
 				console.log('Retrieving Quotation PDF');
 				var file = new Blob([data], {type: 'application/pdf'});
 				var fileURL = URL.createObjectURL(file);
@@ -687,6 +710,8 @@ broker.controller('listClaimRequestCtrl', function ($scope, $rootScope, $http, $
 			$rootScope.error = error;
 		});
 	};
+	
+	
 
 });
 
@@ -694,13 +719,14 @@ broker.controller('claimRequestCtrl', function ($scope, $rootScope, $http, $rout
 
 	$scope.documentName;
 	$scope.mode;
-	$scope.decline;
+	$scope.decline;	
 	$scope.init = function () {
-
 		$scope.decline = {};
-		$scope.claimNumber = $routeParams.claimNumber;
+		$scope.claimNumber = $routeParams.claimNumber;	
 		$scope.showModal = false;
 		$scope.getAllClaimRequest();
+		$scope.getAllReleaseFormData($scope.claimNumber);
+		$scope.viewreleaseFormPDF($scope.claimNumber);
 
 	};
 
@@ -744,8 +770,52 @@ broker.controller('claimRequestCtrl', function ($scope, $rootScope, $http, $rout
 			});
 		}
 	};
+	
+	$scope.getAllReleaseFormData = function (claimNumber) {	
+		$http({			
+			url: '/api/getReleaseFormData/' + claimNumber,			
+			method: 'get'
+		}).success(function (data, status) {
+			if (status == 200) {
+				console.log('ReleaseForm Request retrived sucessfully');
+				$rootScope.releaseForm = data;
+				
+			} else {
+				console.log('status:' + status);
+				$rootScope.error = "error status code : " + status;
+			}
+		}).error(function (error) {
+			console.log(error);
+			$rootScope.error = error;
+		});
+	};
+	
+	$scope.viewreleaseFormPDF = function (claimNumber) {
+        console.log('ClaimNumber No: ' + claimNumber);
+        $http({
+            url: '/api/release-form-pdf/' + claimNumber,
+            responseType: 'arraybuffer',
+            headers: {'Accept': 'application/pdf'},
+            method: 'get'
+        }).success(function (data, status) {
+            if (status == 200) {
+                console.log('Retrieving ReleaseForm PDF');
+                console.log('Retrieving Dada'+data );
+                var file = new Blob([data], {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                $scope.releaseFormPDF = $sce.trustAsResourceUrl(fileURL);
+            } else {
+                console.log('status:' + status);
+                $scope.error = "error status code : " + status;
+            }
+        }).error(function (error) {
+            console.log(error);
+            $rootScope.error = error;
+        });
 
-
+    };
+	
+	
 	$scope.getClaimRequest = function (claimNumber) {
 		$http({
 			url: '/api/claim-requests/' + claimNumber,

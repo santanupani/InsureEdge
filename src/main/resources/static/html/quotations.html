@@ -63,7 +63,7 @@
 			</div>
 			<div class="panel-body">
 
-				<div ng-repeat="option in quotation.option">
+				<div ng-repeat="option in quotation.option" ng-if="quotation.quotationRequest.product.id != 5">
 
 					<div class="panel panel-default">
 						<div class="panel-heading">
@@ -139,14 +139,55 @@
 						</div>
 					</div>
 				</div>
+				<div class="panel panel-default" ng-if="quotation.quotationRequest.product.id == 5">	
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Make Model</label>
+									<input type="text" class="form-control" ng-model="quotation.quotationRequest.makeModel" readonly>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Commodity</label>
+									<input type="text" class="form-control" ng-model="quotation.quotationRequest.commodity" readonly>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Mode Of Coverage</label>
+									<input type="text" class="form-control" ng-model="quotation.quotationRequest.modeOfCoverage" readonly>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Policy Inception Date</label>
+									<input type="text" class="form-control" ng-model="quotation.quotationRequest.policyInceptionDate" readonly>
+								</div>
+								<div class="form-group">
+									<label class="control-label">Policy Expiry Date</label>
+									<input type="text" class="form-control" ng-model="quotation.quotationRequest.policyEndDate" readonly>
+								</div>																				
+								<div class="form-group">
+									<label class="control-label">Cover Limits</label>
+									<div class="input-group"><span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span> <input type="text" class="form-control" ng-model="quotation.quotationRequest.coverAmount" readonly></div>
+								</div>								
+								<div class="form-group">
+									<label class="control-label">Cover</label>
+									<textarea ng-model="quotation.cover" class="form-control" readonly></textarea>
+								</div>								
+								<div class="form-group">
+									<label class="control-label" for="premium">Premium</label>
+									<div class="input-group"><span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span><input type="text" class="form-control" ng-model="quotation.premium" readonly/></div>
+								</div>								
+							</div>
+						</div>
+					</div>										
+				</div>
+				
 			</div>
 
 			<div class="panel-footer text-right">
                             
                                 <p>
-					<a class="btn btn-warning"
+					<!-- <a class="btn btn-warning"
 						ng-href="#/quotation-requests/{{quotation.quotationRequest.reference}}"
-						role="button">Re-Apply For Quotation</a>
+						role="button">Re-Apply For Quotation</a> -->
 				
 					<a class="btn btn-info"
 						ng-href="#/quotations/{{quotation.quotationRequest.reference}}/application"

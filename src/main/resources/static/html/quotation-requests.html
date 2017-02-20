@@ -79,7 +79,7 @@
                 </span>
 
             </div>
-            <div class="panel-body">
+            <div class="panel-body" ng-if= "quotationRequest.product.id != 5">
                 <div>
                     <div class="form-group"
                          ng-repeat="questionnaire in quotationRequest.questionnaire">
@@ -119,7 +119,33 @@
                 </div>
             </div>
 
-        </div>
+			<!-- For product 5 -->
+			<div class="panel-body" ng-if= "quotationRequest.product.id == 5" >               
+            	<div class="row">            		
+            			<div class = "panel-body">
+            				<div class = "form-group">
+            					<label>Mode of you Coverage</label>
+            					<input type="text" class="form-control" ng-model= "quotationRequest.modeOfCoverage" readonly/>   
+            				</div>
+            				<div class = "form-group">
+            					<label>Policy Inception Date</label>
+            					<input type="text" class="form-control" ng-model= "quotationRequest.policyInceptionDate" readonly/>
+            				</div>
+            				<div class = "form-group">
+            					<label>Policy End Date</label>
+            					<input type="text" class="form-control" ng-model= "quotationRequest.policyEndDate" readonly/>
+            				</div>
+            				<div class = "form-group">
+            					<label>Are you currently Insured?</label>
+            					<input type="text" class="form-control" ng-model= "quotationRequest.insuredStatus" readonly/>
+            				</div>
+            				<div class = "form-group">
+            					<label>Do you require SASRIA?</label>
+            					<input type="text" class="form-control" ng-model= "quotationRequest.sasria" readonly/>
+            				</div>
+            			</div>            		
+            	</div>
+        	</div>
 
         <form data-toggle="validator" role="form" name="rejectform"
               id="rejectform">
@@ -153,7 +179,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <div ng-repeat="option in quotationRequest.locationOptions">
+                    <div ng-if= "quotationRequest.product.id != 5" ng-repeat="option in quotationRequest.locationOptions">
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -455,7 +481,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label" for="notes">Notes
@@ -464,8 +490,98 @@
                                         <textarea  class="form-control" maxlength="256" ng-model="quotationRequest.note" required></textarea></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
+                     <div ng-if= "quotationRequest.product.id == 5">                     	
+                     	<div class="row">
+                        	<div class="col-md-8">
+                            	<div class="panel panel-default">
+                                	<div class="panel-body">
+                                   		<div class="row">
+                                        	<div class="col-md-6">
+                                            	<div class="form-group">
+                                                	<label class="control-label">What do you wish to insure?
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.commodity" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-group">Maximum amount you wish to insure?
+                                                    </label>
+                                                    <div class="input-group">
+                                                    	<span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span>
+                                                    	<input type="text" class="form-control" ng-model="quotationRequest.coverAmount" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                	<label class="control-label">Make Model Name
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.makeModel" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                	<label class="control-label">Class Of use
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.classOfuse" readonly>
+                                                </div>   
+                                             </div>
+                                             <div class="col-md-6">
+                                            	<div class="form-group">
+                                                	<label class="control-label">Year Of Manufacture
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.yearOfManufacture" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                	<label class="control-label">Type Of Cover
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.coverType" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                	<label class="control-label">Pensioner Status
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.pensionerStatus" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                	<label class="control-label">Agreed Flag Value
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="quotationRequest.agreedFlag" readonly>
+                                                </div>                                                   
+                                             </div>
+                                      	</div>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="col-md-4">
+                             	<div class="row">
+                                	<div class="col-md-12">
+                                    	<div class="panel panel-default">
+                                        	<div class="panel-body">
+                                            	<div class="form-group">
+                                                 	<label class="control-label">Cover Limits
+                                                    </label>
+                                                    <div class="input-group">
+                                                    	<span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span>
+                                                    	<input type="text" class="form-control" ng-model="quotationRequest.coverAmount" readonly>
+                                                    </div>
+                                                 </div>                                                 
+                                                 <div class="form-group">
+                                                                <label class="control-label">Cover</label>                                                                
+                                                                <textarea ng-model="cover" class="form-control" rows="5"></textarea>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <label class="control-label">Premium</label>
+                                                     <div class= "input-group">
+                                                     	<span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span>
+                                                      	<input type="number" class="form-control" ng-model="quotationRequest.premium"
+                                                      	onfocus="if(this.value == '1') this.value='';" onblur="if(this.value == '') this.value='1';" maxlength="50">
+                                                      </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </div>
+							</div>
+						</div>
+					</div>
+				</div>
                     <div class="panel panel-default" ng-if="quotationPDF">
 
                         <div class="panel-heading">
@@ -491,24 +607,22 @@
                         </div>
 
                     </div>
-                </div>
-
-
-                <div class="panel-footer text-right">
-                    <button ng-if="isQuotationCreated" type="submit"
+                    <div class="panel-footer text-right">
+                    	<button ng-if="isQuotationCreated" type="submit"
                             class="btn btn-success" ng-click="save(form)">Create
-                        Quotation</button>
-                    <button class="btn btn-info" ng-readonly="quotationView"
+                        	Quotation</button>
+                   		<!-- <button class="btn btn-info" ng-readonly="quotationView"
                             ng-if="isQuotationCreated == false"
-                            ng-click="updateQuotation(form)">Preview Quotation</button>
-                    <button class="btn btn-warning" ng-click="changeMode(undefined)">Cancel</button>
-                    <button type="submit" class="btn btn-success"
+                            ng-click="updateQuotation()">Preview Quotation</button>
+                    	<button class="btn btn-warning" ng-click="changeMode(undefined)">Cancel</button> -->
+                    	<button type="submit" class="btn btn-success"
                             ng-click="submitQuotation()" ng-if="isQuotationCreated == false">Submit
-                        Quotation</button>
+                        	Quotation</button>
 
-                </div>
-            </div>
-        </form>
+               		 </div>
+                </div>                
+            </form>
+      	</div>
 
     </div>
 </div>

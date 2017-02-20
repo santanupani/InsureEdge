@@ -3,7 +3,7 @@
 <!-- 2016-03-02T20:57:57 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="quotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<parameter name="quotation" class="za.co.polygon.domain.Quotation"/>
+	<parameter name="quotation" class="za.co.reverside.domain.Quotation"/>
 	<parameter name="quotationWording" class="java.lang.String"/>
 	<parameter name="polygon-logo" class="java.lang.String"/>
 	<parameter name="polygon-footer" class="java.lang.String"/>
@@ -55,21 +55,21 @@
 					<text><![CDATA[Quote Ref. Number:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="245" y="85" width="40" height="20" />
+					<reportElement x="321" y="85" width="40" height="20" />
 					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Date:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="57" y="85" width="193" height="20" />
+					<reportElement x="57" y="85" width="219" height="20" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getCompanyName()]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="280" y="85" width="179" height="20" />
+					<reportElement x="356" y="85" width="179" height="20" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
@@ -83,7 +83,7 @@
 					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getReference()]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="66" y="109" width="295" height="20" />
+					<reportElement x="70" y="109" width="295" height="20" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
@@ -110,123 +110,116 @@
 			<frame>
 				<reportElement x="0" y="0" width="555" height="230"/>
 				<staticText>
-					<reportElement x="34" y="2" width="55" height="18"/>
+					<reportElement x="65" y="2" width="55" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Location -]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="97" y="2" width="343" height="18"/>
+					<reportElement x="118" y="2" width="343" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="34" y="19" width="97" height="18"/>
+					<reportElement x="65" y="19" width="114" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<text><![CDATA[Cover Limits:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="34" y="130" width="97" height="18"/>
+					<reportElement x="65" y="139" width="114" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<text><![CDATA[Excess:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="34" y="157" width="114" height="18"/>
+					<reportElement x="65" y="170" width="114" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<text><![CDATA[Premium:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="131" y="20" width="343" height="18"/>
+					<reportElement x="206" y="20" width="343" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA["R "+$F{limit}+" per vehicle per transit."]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="131" y="34" width="343" height="18"/>
+					<reportElement x="206" y="37" width="343" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA["R "+$F{pavements}+" per cross pavement carry."]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="131" y="128" width="343" height="30"/>
+					<reportElement x="206" y="140" width="343" height="30" />
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{excess}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="131" y="158" width="343" height="32"/>
+					<reportElement x="206" y="171" width="343" height="36" />
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA["R "+$F{premium}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="34" y="62" width="97" height="18"/>
+					<reportElement x="65" y="72" width="114" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<text><![CDATA[Commodity:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="131" y="63" width="343" height="18"/>
+					<reportElement x="206" y="73" width="343" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{commodity}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="131" y="82" width="343" height="28"/>
+					<reportElement x="206" y="92" width="343" height="28" />
 					<textElement textAlignment="Left" verticalAlignment="Top">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cover}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="34" y="81" width="97" height="18"/>
+					<reportElement x="65" y="91" width="114" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<text><![CDATA[Cover	]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="34" y="112" width="97" height="18"/>
+					<reportElement x="65" y="120" width="114" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<text><![CDATA[Duration/Period:	]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="131" y="112" width="343" height="18"/>
+					<reportElement x="206" y="121" width="343" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{duration}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="131" y="49" width="343" height="18"/>
+					<reportElement x="206" y="56" width="343" height="18" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA["R "+$F{staticLimit}+" static on site in safe/vault."]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="34" y="190" width="506" height="37"/>
-					<textElement>
-						<font fontName="Lucida Bright"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$P{quotation}.getNote()]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -248,23 +241,23 @@
 	<summary>
 		<band height="107" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="0" width="555" height="107"/>
+				<reportElement x="0" y="0" width="555" height="107" />
 				<staticText>
-					<reportElement x="34" y="64" width="120" height="20"/>
+					<reportElement x="34" y="64" width="120" height="20" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10" isBold="false"/>
 					</textElement>
 					<text><![CDATA[Best regards,]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="34" y="87" width="120" height="20"/>
+					<reportElement x="34" y="87" width="120" height="20" />
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
-					<text><![CDATA[HJT SNYDER]]></text>
+					<text><![CDATA[ARDHENDU PATRI]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="34" y="4" width="520" height="56"/>
+					<reportElement x="34" y="4" width="520" height="56" />
 					<textElement>
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>

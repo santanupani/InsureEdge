@@ -28,8 +28,8 @@
                                     <th>Claim Number</th>
                                 </tr>
                             </thead>
-                            <tbody ng-repeat="claimRequests in claimRequest| filter:claimRequests">
-                                <tr ng-if="claimRequests.status = 'ApprovalRequest'">
+                            <tbody ng-repeat="claimRequests in claimRequest | filter:claimRequests">
+                                <tr ng-if="claimRequests.status == 'ApprovalRequest' || claimRequests.status == 'Accepted' || claimRequests.status == 'Approved'">
                                     <td>{{index+1}}</td>
                                     <td>{{claimRequests.policy.client.clientName}}</td>
                                     <td>{{claimRequests.claimType.claimType}}</td>

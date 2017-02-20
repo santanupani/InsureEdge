@@ -1,6 +1,7 @@
 --use polygon;
+
 /* table : login */
-create table login (
+create table if not exists login (
     id integer auto_increment not null primary key,
     user_name varchar(32) not null, 
     password varchar(32) not null,
@@ -12,7 +13,7 @@ create table login (
 
 
 /* table : carriers */
-create table carriers (
+create table if not exists carriers (
     id integer auto_increment not null primary key,
     description varchar(64) not null 
 );
@@ -20,7 +21,7 @@ create table carriers (
 
 
 /* table : product */
-create table products(
+create table if not exists products(
     id integer auto_increment not null primary key, 
     name varchar(64) not null, 
     description varchar(256),
@@ -28,7 +29,7 @@ create table products(
 );
 
 /* table : jasper_images */
-create table jasper_images(
+create table if not exists jasper_images(
     id integer auto_increment not null primary key, 
     name varchar(64) not null, 
     image varchar(128) 
@@ -36,7 +37,7 @@ create table jasper_images(
 
 
 /* table : device */
-create table devices(
+create table if not exists devices(
      id integer auto_increment not null primary key,
      name varchar(256) not null
      
@@ -44,7 +45,7 @@ create table devices(
 
 
 /* table: answer_types */
-create table answer_types(
+create table if not exists answer_types(
     id integer auto_increment not null primary key,
     answer_type varchar(16) not null
 );
@@ -52,7 +53,7 @@ create table answer_types(
 
 
 /* table : questionnaires */
-create table questionnaires(
+create table if not exists questionnaires(
     id integer auto_increment not null primary key, 
     product_id integer not null,
     sequence_number integer not null,
@@ -66,7 +67,7 @@ create table questionnaires(
 );
 
 /* table : answer_values */
-create table answer_values(
+create table if not exists answer_values(
     id integer auto_increment not null primary key,
     questionnaire_id integer not null,
     answer_value varchar(128) not null,
@@ -75,7 +76,7 @@ create table answer_values(
 
 
 /* table : broker */
-create table brokers(
+create table if not exists brokers(
     id integer auto_increment not null primary key,
     code varchar(8) not null,
     name varchar(64) not null,
@@ -83,7 +84,7 @@ create table brokers(
 );
 
 /* table : quotation_requests */
-create table quotation_requests(
+create table if not exists quotation_requests(
     id integer auto_increment not null primary key,
     reference varchar(64) not null,
     applicant_name varchar(64) not null,
@@ -93,12 +94,29 @@ create table quotation_requests(
     product_id integer not null,
     create_date date not null,
     status varchar(16) not null,
+    accident_info varchar(8),
+    agreed_flag varchar(8),
+    class_of_use varchar(64),
+    commodity varchar(64),
+    cover_amount varchar(64),
+    cover_type varchar(64),
+    make_model varchar(64),
+    overnight_parking varchar(64),
+    pensioner_status varchar(64),
+    regd_number varchar(64),
+    year_of_manufacture varchar(8),
+    policy_inception_date varchar(32),
+    policy_end_date varchar(32),
+    mode_of_coverage varchar(8),
+    sasria varchar(8),
+    insured_status varchar(8),
+    
     constraint quotation_requests_fk1 foreign key (broker_id) references brokers (id),
     constraint quotation_requests_fk2 foreign key (product_id) references products (id)
 );
 
 
-create table histories(
+create table if not exists histories(
    id integer auto_increment not null primary key,
    quotation_request_id integer not null,
    event_date varchar(26),
@@ -109,7 +127,7 @@ create table histories(
 
 
 /* table : location_options */
-create table location_options(
+create table if not exists location_options(
     id integer auto_increment not null primary key,
     quotation_request_id integer not null,
     commodity varchar(256) not null,
@@ -144,7 +162,7 @@ create table location_options(
 );
 
 /* table : quotation_questoionnaires */
-create table answers(
+create table if not exists answers(
     id integer auto_increment not null primary key,
     quotation_request_id integer not null,
     question varchar(256) not null,
@@ -154,17 +172,19 @@ create table answers(
 
 
 /* table : quotations */
-create table quotations(
+create table if not exists quotations(
     id integer auto_increment not null primary key,
     quotation_request_id integer not null,
     created_date date not null,
     expired_date date null,
     note varchar(256) null, 
+    cover varchar(256),
+    premium varchar(32),
    constraint quotations_fk1 foreign key (quotation_request_id) references quotation_requests (id)
 );
 
 /* table : quotation_options  */
-create table quotation_options(
+create table if not exists quotation_options(
     id integer auto_increment not null primary key,
     quotation_id integer not null,
     location varchar(64) not null,
@@ -180,7 +200,7 @@ create table quotation_options(
 );
 
 /*table : policy_requests */
-create table policy_requests(
+create table if not exists policy_requests(
     id integer auto_increment not null primary key,
     quotation_id integer not null,
     company_reg_number varchar(32) not null,
@@ -207,7 +227,7 @@ create table policy_requests(
 
 
 /* table : bank_accounts */
-create table bank_accounts(
+create table if not exists bank_accounts(
       id integer auto_increment not null primary key,
       account_number varchar(32) not null,
       account_name varchar(32) not null,
@@ -217,7 +237,7 @@ create table bank_accounts(
 );
 
 /* table :  contacts */
-create table contacts(
+create table if not exists contacts(
       id integer auto_increment not null primary key,
       street varchar(32) not null,
       code varchar(32) not null,
@@ -229,7 +249,7 @@ create table contacts(
 );
 
 /* table : insurers */
-create table insurers(
+create table if not exists insurers(
     id integer auto_increment not null primary key, 
     name varchar(64) not null, 
     business_description varchar(256),
@@ -237,7 +257,7 @@ create table insurers(
 );
 
 /* table : clients */
-create table clients (
+create table if not exists clients (
       id integer auto_increment not null primary key,
       bank_account_id integer not null,
       contact_id integer not null,
@@ -253,7 +273,7 @@ create table clients (
 
 
 /* table : underwriters */
-create table underwriters(
+create table if not exists underwriters(
     id integer auto_increment not null primary key, 
     first_name varchar(64) not null, 
     middle_name varchar(64) not null,
@@ -262,7 +282,7 @@ create table underwriters(
 );
 
 /* table : sub_agents */
-create table sub_agents(
+create table if not exists sub_agents(
     id integer auto_increment not null primary key, 
     broker_id integer not null,
     first_name varchar(64) not null, 
@@ -274,7 +294,7 @@ create table sub_agents(
 
 
 /* table : policy_masters */
-create table policies(
+create table if not exists policies(
     id integer auto_increment not null primary key,
     reference varchar(45) not null,
     sub_agent_id integer not null,
@@ -285,6 +305,9 @@ create table policies(
     renewal_date date not null,
     anniversary_date date not null,
     product_name varchar(128) not null,
+    make_model varchar(64),
+    commodity varchar(64),
+    class_of_use varchar(64),
     underwriting_year integer not null,
     status varchar(20) not null,
     frequency varchar(30) not null,
@@ -304,9 +327,9 @@ create table policies(
     schedule_attaching varchar(1024) not null,
     type_of_cover varchar(1024) not null,
     subject_matter varchar(64) not null,
-    excess_structure varchar(256) not null,
+    excess_structure varchar(256),
     special_condition varchar(1024) not null,
-    conveyances varchar(256) not null,
+    conveyances varchar(256),
     geographical_duration varchar(2048) not null,
     notes varchar(256) not null,
     constraint policies_fk1 foreign key (sub_agent_id) references sub_agents (id),
@@ -315,7 +338,7 @@ create table policies(
 );
 
 /* table : policy endorsements */
-create table endorsements(
+create table if not exists endorsements(
     id integer auto_increment not null primary key,
     policy_id integer not null,
     endorsement_date date not null,
@@ -349,7 +372,7 @@ create table endorsements(
 
 /* table : indemnity_option */
 
-create table indemnity_options(
+create table if not exists indemnity_options(
     id integer auto_increment not null primary key,
     policy_id integer not null,
     indemity_item_option varchar(64) not null,   
@@ -362,18 +385,18 @@ create table indemnity_options(
 );
 
 
-create table claim_types(
+create table if not exists claim_types(
     id integer auto_increment not null primary key,
     claim_type varchar(32) not null
 );
 
 
-create table claim_answer_types(
+create table if not exists claim_answer_types(
    id integer auto_increment not null primary key,
    claim_answer_type varchar(16) not null
 );
 
-create table claim_questionnaires(
+create table if not exists claim_questionnaires(
    id integer auto_increment not null primary key,
    claim_type_id integer not null,
    claim_answer_type_id integer not null,
@@ -384,7 +407,7 @@ create table claim_questionnaires(
    constraint claim_questinnaires_fk1 foreign key (claim_type_id) references claim_types(id)
 );
 
-create table claim_answer_values(
+create table if not exists claim_answer_values(
     id integer auto_increment not null primary key,
     claim_questionnaire_id integer not null,
     claim_answer_value varchar(16),
@@ -393,7 +416,7 @@ create table claim_answer_values(
 
 
 
-create table claim_requests(
+create table if not exists claim_requests(
     id integer auto_increment not null primary key,
     claim_number varchar(64) not null,
     policy_id integer not null,
@@ -431,7 +454,7 @@ create table claim_requests(
     constraint claim_request_fk2 foreign key (claim_type_id) references claim_types(id)
 );
 
-create table claim_answers(
+create table if not exists claim_answers(
       id integer auto_increment not null primary key,
      claim_request_id integer not null,
      question varchar(128) not null,
@@ -441,30 +464,32 @@ create table claim_answers(
 );
 
 
-create table release_form(
+create table if not exists release_form(
     id integer auto_increment not null primary key,
+    claim_number varchar(64) not null,
+    policy_number varchar(64) not null,
     claim_request_id integer not null,
     insured varchar(64) not null,
     amount_claim double not null,
-    less_excess varchar(64) not null,
+    less_excess double not null,
     total_payeble double not null,
-    good_description varchar(64) not null,
+    good_description varchar(256) not null,
     loss_date varchar(64) not null,
-    loss_description varchar(128) not null,
+    loss_description varchar(256) not null,
     constraint release_form_fk1 foreign key (claim_request_id) references claim_requests(id) 
 );
 
-create table request_types(
+create table if not exists request_types(
     id integer auto_increment not null primary key,
     request_type varchar(32) not null
 );
 
-create table request_answer_types(
+create table if not exists request_answer_types(
    id integer auto_increment not null primary key,
    request_answer_type varchar(16) not null
 );
 
-create table request_questionnaires(
+create table if not exists request_questionnaires(
    id integer auto_increment not null primary key,
    request_type_id integer not null,
    request_answer_type_id integer not null,
@@ -475,17 +500,17 @@ create table request_questionnaires(
    constraint request_questinnaires_fk2 foreign key (request_type_id) references request_types(id)
 );
 
-create table request_answer_values(
+create table if not exists request_answer_values(
     id integer auto_increment not null primary key,
     request_questionnaire_id integer not null,
     request_answer_value varchar(16),
     constraint request_answer_values_fk1 foreign key (request_questionnaire_id) references request_questionnaires (id)
 );
 
-create table policy_request_type(
+create table if not exists policy_request_type(
      id integer auto_increment not null primary key,
-     request_type_id varchar(32) not null,
-     policy_id varchar(16) not null,
+     request_type_id integer not null,
+     policy_id integer not null,
      status_from varchar(16),
      reference varchar(60) not null,
      created_date date not null,
@@ -495,7 +520,7 @@ create table policy_request_type(
      constraint policy_request_type_fk2 foreign key (request_type_id) references  request_types(id)
 );
 
-create table request_answers(
+create table if not exists request_answers(
      id integer auto_increment not null primary key,
      request_type_id integer not null,
      question varchar(128) not null,

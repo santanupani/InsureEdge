@@ -86,11 +86,12 @@
                                             <tbody ng-repeat="clientPolicy in clientPolicies| filter:clientPolicy">
                                                 <tr>
                                                     <td>{{$index + 1}}</td>
-                                                    <td><a role="button" ng-href="#/policy/{{clientPolicy.reference}}">{{clientPolicy.reference}}</a></td>
+                                                    <!-- <td><a role="button" ng-href="#/policy/{{clientPolicy.reference}}">{{clientPolicy.reference}}</a></td> -->
+                                                    <td>{{clientPolicy.reference}}</td>
                                                     <td>{{clientPolicy.subjectMatter}}</td>
                                                     <td>{{clientPolicy.status}}</td>
                                                     <td><a role="button" class="btn btn-info" ng-href="#/claims/{{clientPolicy.reference}}">Log Claim</a></td>
-                                                    <td><a role="button" class="btn btn-info" ng-href="#/policy-request/{{clientPolicy.reference}}">Log Request</a></td>
+                                                    <td><a role="button" disabled ="true" class="btn btn-info" ng-href="#/policy-request/{{clientPolicy.reference}}">Log Request</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -173,7 +174,7 @@
                                             <tbody ng-repeat="clientClaim in clientClaims | filter:clientClaim">
                                                 <tr>
                                                     <td>{{$index + 1}}</td>
-                                                    <td><a role="button" ng-href="#/claim-requests/{{clientClaim.claimNumber}}">{{clientClaim.claimNumber}}</a></td>
+                                                    <td><a role="button" ng-href="#/claim-requests/{{clientClaim.claimNumber}}/claim">{{clientClaim.claimNumber}}</a></td>
                                                     <td>{{clientClaim.claimType.claimType}}</td>
                                                     <td>{{clientClaim.status}}</td>
                                                     <td ng-if="clientClaim.status == 'Pending Documets' || clientClaim.status == 'Pending Documents Requested'"><a role="button" class="btn btn-info" ng-href="#/claim-requests/{{clientClaim.claimNumber}}/claim">Claim</a></td>

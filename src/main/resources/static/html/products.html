@@ -9,16 +9,18 @@
 	
 	<div class="col-md-3" ng-repeat="product in products">
 		<div class="panel panel-default" style="box-shadow: 0 0 30px black;">
-			<div class="panel-body" align="center" style="height: 300px;">
-				<img class="img-circle" ng-src="{{product.image}}"  width="140" height="140">
+			<div class=" panel-body" align="center" style="height: 350px;">
+				<img class="img-circle" ng-src="{{product.image}}"  width="200" height="180">
 				<h3>{{product.name}}</h3>
 				<p>{{product.description}}</p>
 			</div>
-			<div class="panel-footer text-right">
+			<div class=" panel-footer text-right">
 				<p>
                     <a class="btn btn-default" ng-href="#/products/{{product.id}}/questionnaires" role="button">Get Quote</a>
+                    
 				</p>
 			</div>
+			
 		</div>
 	</div>
 	

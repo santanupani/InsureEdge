@@ -3,7 +3,7 @@
 <!-- 2015-11-23T08:51:04 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="policyReports" pageWidth="595" pageHeight="900" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<parameter name="policy" class="za.co.polygon.domain.Policy"/>
+	<parameter name="policy" class="za.co.reverside.domain.Policy"/>
 	<parameter name="polygon-sched" class="java.lang.String"/>
 	<parameter name="polygon-logo" class="java.lang.String"/>
 	<parameter name="genric-logo" class="java.lang.String"/>
@@ -62,35 +62,35 @@
 					<textElement verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Genric Insurance Company Ltd]]></text>
+					<text><![CDATA[Reverside Software Solutions Pty (Ltd)]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="204" y="74" width="336" height="18" />
 					<textElement verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[2154]]></text>
+					<text><![CDATA[2196]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="204" y="51" width="336" height="18" />
 					<textElement verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Bromhof]]></text>
+					<text><![CDATA[Sandton]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="204" y="28" width="336" height="18" />
 					<textElement verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="12" isBold="true"/>
 					</textElement>
-					<text><![CDATA[P.O Box 1115]]></text>
+					<text><![CDATA[P.O Box 2196]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="204" y="98" width="336" height="18" />
 					<textElement verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="12"/>
 					</textElement>
-					<text><![CDATA[Polygon Underwriting Agency (Pty) Ltd]]></text>
+					<text><![CDATA[Reverside Software Solutions Pty (Ltd)]]></text>
 				</staticText>
 			</frame>
 			<frame>
@@ -281,7 +281,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="12" isBold="true" pdfEncoding=""/>
 					</textElement>
-					<text><![CDATA[SIGNED at MIDRAND on]]></text>
+					<text><![CDATA[SIGNED at SANDTON on]]></text>
 				</staticText>
 				<textField pattern="MMMMM dd, yyyy">
 					<reportElement x="170" y="301" width="222" height="18" />
@@ -295,35 +295,35 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Polygon Underwriting Agency (Pty) Ltd]]></text>
+					<text><![CDATA[Reverside Software Solutions (Pty) Ltd]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="0" y="403" width="555" height="18" />
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Lucida Bright" size="10"/>
 					</textElement>
-					<text><![CDATA[PO Box 13365, Clubview, Centurion, 0014]]></text>
+					<text><![CDATA[PO Box 2196, Hurlingham Office Park, Sandton, 0014]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="0" y="424" width="555" height="18" />
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Tel No: 0861 110 3000	Fax No: 086 531 3005	www.polygongroup.co.za]]></text>
+					<text><![CDATA[Tel No: 086 199 9990	Fax No: 086 549 3889 www.reverside.co.za]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="0" y="444" width="555" height="18" />
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Reg No: 2007/019308/07		GENRIC INSURANCE VAT No: 4190226169]]></text>
+					<text><![CDATA[Reg No: 2007/014246/07 REVERSIDE VAT No: 4630231886]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="0" y="465" width="555" height="18" />
 					<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 						<font fontName="Lucida Bright" size="10" isBold="true"/>
 					</textElement>
-					<text><![CDATA[We are an Authorized Finacial Services Provider: FSP No - 35345]]></text>
+					<text><![CDATA[We are an Authorized Finacial Services Provider: FSP No - 00000]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -418,14 +418,14 @@
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<image scaleImage="FillFrame">
+				<!--<image scaleImage="FillFrame">
 					<reportElement x="14" y="10" width="56" height="53" />
 					<imageExpression><![CDATA[$P{genric-logo}.toString()]]></imageExpression>
 				</image>
 				<image scaleImage="FillFrame">
 					<reportElement x="388" y="10" width="160" height="40" />
 					<imageExpression><![CDATA[$P{polygon-sched}.toString()]]></imageExpression>
-				</image>
+				</image>-->
 				<textField>
 					<reportElement x="0" y="10" width="555" height="20" />
 					<textElement textAlignment="Center" verticalAlignment="Middle">

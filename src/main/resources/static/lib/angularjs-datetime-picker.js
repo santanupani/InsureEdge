@@ -27,6 +27,8 @@
       }
     };
   };
+  
+  
   DatetimePicker.$inject = ['$compile', '$document', '$controller'];
   angular.module('angularjs-datetime-picker').factory('DatetimePicker', DatetimePicker);
 

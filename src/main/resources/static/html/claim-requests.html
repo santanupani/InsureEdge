@@ -307,7 +307,7 @@
 
 
 
-<!--                                <div class="panel panel-default"
+								<!-- <div class="panel panel-default"
                                      style="box-shadow: 0 0 30px #ffff;">
                                     <div class="panel-heading">
                                         <h5>
@@ -345,26 +345,84 @@
                                                                               ng-model="claimQuestionnaire.answer" readonly="readonly"></textarea>
                                                                 </div>
                                                             </div>
+                                                            
+															<div class="form-group">
+																<label class="control-label" for="policyNumber">Policy Number</label>
+																<input type="text" class="form-control" ng-model="claimRequest.policy.reference" readonly>
+															</div>
+															<div class="form-group">
+																<label class="control-label" for="lessExcess">Less Excess</label>
+																	<div class="input-group">
+																		<span class="input-group-addon">R</span>
+																			<input type="text" placeholder="100 000 000" class="form-control" min=" "
+																			max=" " ng-model="lessExcess" pattern="[0-9]+([\.,][0-9]+)*" format>
+																	</div>
+															</div>
+															<div class="form-group">
+																<label class="control-label" for="totalPayable">Total Payable To Insured</label>
+																	<div class="input-group">
+																		<span class="input-group-addon">R</span>
+																			<input type="text" placeholder="100 000 000" class="form-control" min=" "
+																			 max=" " ng-model="totalPayable" pattern="[0-9]+([\.,][0-9]+)*" format required>
+																	</div>
+															</div>
                                                         </div>
                                                     </div>
-<!--                                                </div>
 
-                                            </div>-->
 
                                         </div>
+                                        
                                                 
                                     </div>
 
-                                </div>
-                                            <div class="panel-footer text-right">
-                        <button class="btn btn-info" type="submit" ng-if="claimRequest.status == 'APPLIED'" ng-click="approveClaim(claimRequest.claimNumber)">Request For Approval</button>
-                        <button class="btn btn-info" type="submit" ng-if="claimRequest.status == 'Pending Documets'" ng-click="requestForPendingDocuments(claimRequest.claimNumber)">Request For Pending Documents</button>
-                        <button class="btn btn-info" type="submit" ng-if="claimRequest.status == 'Accepted'" ng-click="changeMode('accept')">Accept Claim Request</button>
-                        <button class="btn btn-warning" ng-click="changeMode('decline')">Decline Claim</button>
-                    </div>
-                            </div>
+                                </div>	
+                                
+                              <div class="panel panel-default" ng-if="releaseFormPDF">
 
+                        			<div class="panel-heading">
+
+                            			<h4 class="panel-title">
+
+                                			<a data-toggle="collapse" data-parent="#accordion"
+                                   			href="/#collapseFive">ReleaseForm Preview</a>
+
+                            			</h4>
+
+                        			</div>
+
+                        		<div id="collapseFive" class="panel-collapse collapse">
+
+                            		<div class="panel-body">
+
+                                		<div class="modal-content">
+                                   			<object data="{{releaseFormPDF}}"
+                                            style="width: 100%; height: 700px"></object>
+                                		</div>
+                            		</div>
+                        		</div>
+
+                    		</div>
+                     </div>                     
+                	
+                	
+                    
+                	<div class="panel-footer text-right">
+                    	<button class="btn btn-success" type="submit" ng-if="isReleaseFormCreated == true && mode == undefined" ng-click="save(form)">Create Release Form</button>                    	
+                    	<button class="btn btn-info" type="submit" ng-if=" isReleaseFormCreated == false && claimRequest.status == 'APPLIED' " ng-click="approveClaim(claimRequest.claimNumber)">Request For Approval</button>
+                        <button class="btn btn-info" type="submit" ng-if=" isReleaseFormCreated == false && claimRequest.status == 'Pending Documets' " ng-click="requestForPendingDocuments(claimRequest.claimNumber)">Request For Pending Documents</button>
+                        <button class="btn btn-info" type="submit" ng-if=" isReleaseFormCreated == false && claimRequest.status == 'Accepted' " ng-click="changeMode('accept')">Accept Claim Request</button>
+                        <button class="btn btn-warning" ng-if="isReleaseFormCreated == true && mode == undefined" ng-click="changeMode('decline')">Decline Claim</button>
                         
+                        
+                    	<!--<button class="btn btn-info" ng-readonly="releaseFormView" ng-if="isReleaseFormCreated == false"
+                            ng-click="updateReleaseForm(releaseForm)">Update/Preview Release Form
+                        </button>
+                    	<button class="btn btn-warning" ng-click="changeMode(undefined)">Cancel</button>
+                    	<button type="submit" class="btn btn-success" ng-click="submitQuotation()" ng-if="isReleaseFormCreated == false">Submit
+                        Release Form</button> -->
+
+                	</div>
+					                     
 
                 
 
@@ -373,105 +431,33 @@
 
 
             </form>
+           
+            
+            <form data-toggle="validator" role="form" name="declineform" id="declineform">
+            				<div ng-if="mode == 'decline'" class="panel panel-default" style="box-shadow: 0 0 30px #ffff;">
+                				<div class="panel-heading">
+                    				<h4>Decline Claim Request</h4>
+                				</div>
+               					<div >
+                    				<div>
+                        				<div class="form-group">
+                            				<textarea placeholder="Please fill in reason for decline here"
+                                    	  		rows="9" class="form-control" type="text"
+                                     	 		ng-model="decline.reason" required></textarea>
+                        				</div>
+                    				</div>
+                				</div>
+                					<div class="panel-footer text-right">
+                    					<button type="submit" class="btn btn-warning"
+                            			ng-click="declineClaimRequest(declineform)">Decline</button>
+                    					<button class="btn btn-primary" ng-click="changeMode(undefined)">Cancel</button>
+                					</div>
+            				</div>
+        	</form>
+        			
+        			
         </div>
-
-
-        <form data-toggle="validator" role="form" name="releaseForm" id="releaseForm">
-            <div ng-if="mode == 'accept'" class="panel panel-default"
-                 style="box-shadow: 0 0 30px black;">
-                <div class="panel-heading">
-                    <h4>Create Release Form</h4>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label class="control-label" for="ClaimNumber">Claim Number</label> <input type="text" class="form-control"
-                                              ng-model="claimRequest.claimNumber" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="policyNumber">Policy Number</label>
-                        <input type="text" class="form-control"
-                               ng-model="claimRequest.policy.reference" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="insured">Insured</label>
-                        <input type="text" ng-model="claimRequest.policy.client.clientName" class="form-control" readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="amountClaim">Amount Of Claim</label> <input type="text" class="form-control"
-                                        ng-model="amountClaim"
-                                             readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="lessExcess">Less Excess</label>
-                        <input type="text" class="form-control"
-                               ng-model="release.lessExcess" >
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="totalPayable">Total Payable To Insured</label> <input type="text" class="form-control"
-                                                ng-model="release.totalPayable"
-                                                >
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="goodsDescription">Description of Goods
-                           </label>
-                        <textarea class="form-control"
-                                  ng-model="release.goodDescription" required ></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="lossDate">Date Of Loss </label>
-                        <input type="text" class="form-control"
-                               ng-model="lossDate" required readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="lossDescription">Description of Loss</label> <input type="text" class="form-control"
-                                                          ng-model="release.lossDescription" required >
-                    </div>
-                </div>
-
-
-                <div class="panel-footer text-right">
-                    <button  type="submit"
-                            class="btn btn-success" ng-click="save(form)">Create
-                        Release Form</button>
-                    <button class="btn btn-info" ng-readonly="releaseFormView"
-                            ng-if="isReleaseFormCreated == false"
-                            ng-click="updateReleaseForm(releaseForm)">Update/Preview Release Form</button>
-                    <button class="btn btn-warning" ng-click="changeMode(undefined)">Cancel</button>
-                    <button type="submit" class="btn btn-success"
-                            ng-click="submitQuotation()" ng-if="isReleaseFormCreated == false">Submit
-                        Release Form</button>
-
-                </div>
-            </div>
-        </form>
-
-
-        <form data-toggle="validator" role="form" name="declineform"  id="declineform" >
-            <div ng-if="mode == 'decline'" class="panel panel-default"
-                 style="box-shadow: 0 0 30px black;">
-                <div class="panel-heading">
-                    <h4>Decline Claim Request</h4>
-                </div>
-                <div class="panel-body">
-                    <div>
-                        <div class="form-group">
-                            <textarea placeholder="Please fill in reason for declining here"
-                                      rows="9" class="form-control" type="text"
-                                      ng-model="decline.reason" required></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer text-right">
-                    <button type="submit" class="btn btn-warning"
-                            ng-click="declineClaimRequest(declineform)">Decline</button>
-                    <button class="btn btn-primary" ng-click="changeMode(undefined)">Cancel</button>
-                </div>
-            </div>
-        </form>
+        
     </div>
-</div>
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://polygon.co.za/model"
-	xmlns:tns="http://polygon.co.za/model" elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://reverside.co.za/model"
+	xmlns:tns="http://reverside.co.za/model" elementFormDefault="qualified">
 
 	<element name="UserQueryModel">
 		<complexType>
@@ -77,6 +77,20 @@
 			<element name="companyName" type="string" />
 			<element name="applicantName" type="string" />
 			<element name="applicantEmail" type="string" />
+			<element name="modeOfCoverage" type="string" />
+			<element name="policyInceptionDate" type="string" />
+			<element name="policyEndDate" type="string" />
+			<element name="insuredStatus" type="string" />
+			<element name="sasria" type="string" />
+			<element name="commodity" type="string"/>
+			<element name="coverAmount" type="string"/>
+			<element name="makeModel" type="string"/>
+			<element name="classOfuse" type="string"/>
+			<element name="yearOfManufacture" type="string"/>
+			<element name="coverType" type="string"/>
+			<element name="pensionerStatus" type="string"/>
+			<element name="agreedFlag" type="string"/>			
+			
 			<element name="product" minOccurs="0" maxOccurs="1"
 				type="tns:ProductQueryModel" />
 			<element name="broker" minOccurs="0" maxOccurs="1"
@@ -154,9 +168,11 @@
 		<sequence>
 			<element name="quotationId" type="long" />
 			<element name="createdDate" type="string" />
-                        <element name="note" type="string" />
+            <element name="note" type="string" />
 			<element name="quotationRequest" minOccurs="0" maxOccurs="1"
 				type="tns:QuotationRequestQueryModel" />
+			<element name="cover" type="string" />
+			<element name="premium" type="string" />
 			<element name="option" minOccurs="0" maxOccurs="unbounded">
 				<complexType>
 					<sequence>
@@ -378,6 +394,23 @@
 				<element name="applicantEmail" type="string" />
 				<element name="brokerId" type="long" />
 				<element name="productId" type="long" />
+				<element name="accidentInfo" type="string"/>
+				<element name="agreedFlag" type="string"/>
+				<element name="classOfuse" type="string"/>
+				<element name="commodity" type="string"/>
+				<element name="coverAmount" type="string"/>
+				<element name="coverType" type="string"/>
+				<element name="makeModel" type="string"/>
+				<element name="overnightParking" type="string"/>
+				<element name="pensionerStatus" type="string"/>
+				<element name="regdNumber" type="string"/>
+				<element name="yearOfManufacture" type="string"/>
+				<element name="policyInceptionDate" type="string"/>
+				<element name="policyEndDate" type="string"/>
+				<element name="modeOfCoverage" type="string"/>
+				<element name="sasria" type="string"/>
+				<element name="insuredStatus" type="string"/>
+				
 				<element name="questionnaires" minOccurs="0" maxOccurs="unbounded">
 					<complexType>
 						<sequence>
@@ -439,8 +472,10 @@
 		<complexType>
 			<sequence>
 				<element name="reference" type="string" />
-                                <element name="note" type="string" />
-				<element name="options" minOccurs="0" maxOccurs="unbounded">
+                <element name="note" type="string" />
+                <element name="premium" type="string" />
+                <element name="cover" type="string" />
+				<element name="options" minOccurs="0" maxOccurs="unbounded">			
 					<complexType>
 						<sequence>
 							<element name="location" type="string" />
@@ -567,6 +602,10 @@
 				<element name="policyInceptionDate" type="string" />
 				<element name="anniversaryDate" type="string" />
 				<element name="productName" type="string" />
+				<element name="makeModel" type="string" />
+				<element name="commodity" type="string" />
+				<element name="classOfuse" type="string" />
+				<element name="productId" type="string" />
 				<element name="sasriaFrequency" type="string" />
 				<element name="device" type="string" />
 				<element name="frequency" type="string" />
@@ -788,11 +827,29 @@
 	<element name="ReleaseFormCommandModel">
         <complexType>
             <sequence>
+            	<element name="claimRequestId" type="integer"></element>
+            	<element name="policyNumber" type="string"></element>
                 <element name="claimNumber" type="string"></element>
-                <element name="insured" type="string"></element>
+                <element name="insured" type="string"></element>                
                 <element name="amountClaim" type="double"></element>
-                <element name="lessExcess" type="string"></element>
-                <element name="totalPayable" type="double"></element>
+                <element name="lessExcess" type="double"></element>
+                <element name="totalPayeble" type="double"></element>
+                <element name="goodDescription" type="string"></element>
+                <element name="lossDate" type="string"></element>
+                <element name="lossDescription" type="string"></element>
+            </sequence>
+        </complexType>
+    </element>
+   <element name="ReleaseFormQueryModel">
+        <complexType>
+            <sequence>
+            	<element name="claimRequestId" type="integer"></element>
+            	<element name="policyNumber" type="string"></element>
+                <element name="claimNumber" type="string"></element>
+                <element name="insured" type="string"></element>                
+                <element name="amountClaim" type="double"></element>
+                <element name="lessExcess" type="double"></element>
+                <element name="totalPayeble" type="double"></element>
                 <element name="goodDescription" type="string"></element>
                 <element name="lossDate" type="string"></element>
                 <element name="lossDescription" type="string"></element>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="underwritter">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Insure-Edge</title>
+        <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/lib/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="/css/styles.css" rel="stylesheet">
+        <script type="text/javascript"  src="/lib/jquery/jquery.min.js"></script>
+        <script  type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script  type="text/javascript" src="/lib/angular/angular.min.js"></script>
+        <script  type="text/javascript" src="/lib/angular/angular-cookies.js"></script>
+        <script  type="text/javascript" src="/lib/angular/angular-route.min.js"></script>
+        <script  type="text/javascript" src="/lib/angular/angular-messages.js"></script>
+        <script  type="text/javascript" src="/lib/angular/angular-animate.js"></script>
+        <script  type="text/javascript" src="/lib/angular/ui-bootstrap-tpls-0.13.4.js"></script>
+        <script  type="text/javascript" src="/js/underwritter.js"></script>
+    </head>
+
+    <body ng-controller="underwritterCtrl" ng-init="init()" style="background: silver;">
+
+        <div ng-if="session" id="wrapper" class="container-fluid" > 
+
+            <div id="header" ng-include="'/html/underwritter-header.html'"></div>
+            
+            <div class="row" >
+                
+                    <div id="content" ng-view>Loading....</div>
+                    
+            </div>
+            
+            <div id="footer" ng-include="'/html/underwritter-footer.html'"></div>
+
+        </div>
+
+    </body>
+
+</html>

@@ -1,6 +1,5 @@
 <div class="row" style="padding: 25px;" ng-init="init()">
 
-
 	<div class="alert alert-success alert-dismissible" role="alert"
 		ng-if="error">
 		<button type="button" class="close" data-dismiss="alert"
@@ -18,8 +17,6 @@
 		</button>
 		<strong>Success ! </strong>{{message}}
 	</div>
-
-
 
 	<form data-toggle="validator" role="form" name="rejectform"
 		id="rejectform">
@@ -45,12 +42,8 @@
 		</div>
 	</form>
 
-
-
-
 	<div>
 		<div class="panel panel-default" style="box-shadow: 0 0 30px black;">
-
 			<div class="panel-heading text-right"
 				ng-if="mode == undefined && policyRequest.status == 'APPLIED'">
 				<p>
@@ -61,7 +54,7 @@
 				</p>
 			</div>
 			<div class="panel-body">
-				<div class="panel-body">
+				<div class="panel-body" ng-if="policyRequest.quotation.quotationRequest.product.id != 5">
 
 					<div ng-repeat="option in policyRequest.quotation.option">
 
@@ -142,9 +135,58 @@
 						</div>
 					</div>
 				</div>
+				<div class="panel-body" ng-if="policyRequest.quotation.quotationRequest.product.id == 5">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion"
+										href="/#quotation">Quotation Application</a>
+								</h4>
+						</div>
+						<div id="quotation" class="panel-collapse collapse-in">								
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="control-label">Make Model</label>
+											<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.makeModel" readonly>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Commodity</label>
+											<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.commodity" readonly>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Mode Of Coverage</label>
+											<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.modeOfCoverage" readonly>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Policy Inception Date</label>
+											<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.policyInceptionDate" readonly>
+										</div>
+										<div class="form-group">
+											<label class="control-label">Policy Expiry Date</label>
+											<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.policyEndDate" readonly>
+										</div>																				
+										<div class="form-group">
+											<label class="control-label">Cover Limits</label>
+											<div class="input-group"><span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span> <input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.coverAmount" readonly></div>
+										</div>								
+										<div class="form-group">
+											<label class="control-label">Cover</label>
+											<textarea ng-model="policyRequest.quotation.cover" class="form-control" readonly></textarea>
+										</div>								
+										<div class="form-group">
+											<label class="control-label" for="premium">Premium</label>
+											<div class="input-group"><span class="input-group-addon" style="background: #E3E3E3; color: #767676">R</span><input type="text" class="form-control" ng-model="policyRequest.quotation.premium" readonly/></div>
+										</div>								
+									</div>
+								</div>
+							</div>										
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
 		<div class="panel panel-default" style="box-shadow: 0 0 30px black;">
 			<div class="panel-heading">
 				<h4>Product</h4>
@@ -157,7 +199,6 @@
 				<p>{{policyRequest.quotation.quotationRequest.product.description}}</p>
 			</div>
 		</div>
-
 		<div class="panel panel-default" style="box-shadow: 0 0 30px black;">
 			<div class="panel-heading">
 				<h4>Client Details</h4>
@@ -207,13 +248,10 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="panel panel-default" style="box-shadow: 0 0 30px black;">
-
 			<div class="panel-heading">
 				<h4>Client Bank Details</h4>
 			</div>
-
 			<div class="panel-body">
 				<div>
 					<div class="form-group">
@@ -244,14 +282,13 @@
 				</div>
 			</div>
 		</div>
-
 		<div>
 			<div class="panel panel-default" style="box-shadow: 0 0 30px black;">
 
 				<div class="panel-heading">
 					<h1>Q and A</h1>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body" ng-if="policyRequest.quotation.quotationRequest.product.id != 5">
 					<div>
 						<div class="form-group"
 							ng-repeat="questionnaire in policyRequest.quotation.quotationRequest.questionnaire">
@@ -264,7 +301,31 @@
 						</div>
 					</div>
 				</div>
+				<div class="panel-body" ng-if="policyRequest.quotation.quotationRequest.product.id == 5">
+					<div>
+						<div class="form-group">
+							<label class="control-label">Mode of you Coverage</label>
+							<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.modeOfCoverage" readonly>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Policy Inception Date</label>
+							<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.policyInceptionDate" readonly>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Policy End Date</label>
+							<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.policyEndDate" readonly>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Are you currently Insured?</label>
+							<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.insuredStatus" readonly>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Do you require SASRIA?</label>
+							<input type="text" class="form-control" ng-model="policyRequest.quotation.quotationRequest.sasria" readonly>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-
 	</div>
+</div>
