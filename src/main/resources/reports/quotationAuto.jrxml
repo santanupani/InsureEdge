@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2016-10-26T11:33:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="quotation" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="quotation" class="za.co.reverside.domain.Quotation"/>
+	<parameter name="quotationWording" class="java.lang.String"/>
+	<parameter name="polygon-logo" class="java.lang.String"/>
+	<parameter name="polygon-footer" class="java.lang.String"/>
+	<field name="premium" class="java.lang.String"/>
+	<field name="cover" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="200" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="176" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<image scaleImage="FillFrame">
+					<reportElement x="0" y="0" width="555" height="80" />
+					<imageExpression><![CDATA[$P{polygon-logo}.toString()]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="350" y="90" width="39" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+						<font fontName="Lucida Bright" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="410" y="90" width="133" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd MMMM yyyy").format($P{quotation}.getQuotationRequest().getCreateDate())]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="31" y="109" width="31" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+						<font fontName="Lucida Bright" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dear: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="70" y="109" width="295" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getApplicantName()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="31" y="132" width="30" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+						<font fontName="Lucida Bright" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[C/O:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="70" y="133" width="219" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getCompanyName()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="32" y="156" width="38" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="styled">
+						<font fontName="Lucida Bright" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Email:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="71" y="156" width="219" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getApplicantEmail()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="267" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="-24" width="555" height="284" />
+				<staticText>
+					<reportElement x="31" y="50" width="123" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<text><![CDATA[Quote Ref. Number:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="180" y="51" width="100" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getReference()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="100" y="7" width="387" height="33" />
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Quotation for Auto Insurance]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="31" y="72" width="123" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<text><![CDATA[Product Name]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="180" y="72" width="100" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getProduct().getName()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="313" y="51" width="110" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<text><![CDATA[Cover Effective Date:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="313" y="72" width="110" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<text><![CDATA[Cover Expiry Date:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="451" y="50" width="93" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getPolicyInceptionDate()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="450" y="73" width="93" height="18" />
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getPolicyEndDate()]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="4" y="100" width="544" height="180" />
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<staticText>
+						<reportElement x="26" y="99" width="114" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Cover Limits               :]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="302" y="101" width="98" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Premium               :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="147" y="100" width="153" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA["R "+$P{quotation}.getQuotationRequest().getCoverAmount()+" per vehicle."]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="410" y="102" width="88" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA["R "+$F{premium}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="301" y="10" width="99" height="18"/>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Insure Type          :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="409" y="10" width="93" height="18" />
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getCommodity()]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="148" y="131" width="359" height="49" />
+						<textElement textAlignment="Left" verticalAlignment="Top">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{cover}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="30" y="131" width="110" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Cover	                     :]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="26" y="10" width="114" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Make Model                :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="147" y="10" width="98" height="18" />
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getMakeModel()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="26" y="40" width="114" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Year of Manufacture  :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="147" y="40" width="98" height="18" />
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getYearOfManufacture()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="26" y="70" width="114" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Class of Use                :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="147" y="70" width="98" height="18" />
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getClassOfuse()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="301" y="71" width="99" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Cover Type           :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="409" y="71" width="90" height="18" />
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getCoverType()]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement x="300" y="40" width="100" height="18" />
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10" isBold="true"/>
+						</textElement>
+						<text><![CDATA[Mode of Coverage :]]></text>
+					</staticText>
+					<textField>
+						<reportElement x="409" y="41" width="93" height="18" />
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Left" verticalAlignment="Middle">
+							<font fontName="Lucida Bright" size="10"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$P{quotation}.getQuotationRequest().getModeOfCoverage()]]></textFieldExpression>
+					</textField>
+				</frame>
+				<staticText>
+					<reportElement x="4" y="40" width="544" height="53" />
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="99" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="99" />
+				<image scaleImage="FillFrame">
+					<reportElement positionType="FixRelativeToBottom" x="0" y="10" width="555" height="89" />
+					<imageExpression><![CDATA[$P{polygon-footer}.toString()]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="107" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="107" />
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<staticText>
+					<reportElement x="30" y="64" width="120" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Best regards,]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="31" y="87" width="120" height="20" />
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<text><![CDATA[ARDHENDU PATRI]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="31" y="8" width="520" height="56" />
+					<textElement textAlignment="Justified">
+						<font fontName="Lucida Bright" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{quotationWording}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

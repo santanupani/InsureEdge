@@ -1,0 +1,404 @@
+<div class="row" style="padding: 25px;" ng-init="init()">
+
+
+
+    <div class="col-md-12">
+
+
+
+
+              <form name="form"  novalidate>
+                  
+                            <div class="panel panel-default"
+                                 style="box-shadow: 0 0 30px #ffff;">
+                                <div class="panel-heading">
+                                    <h5>
+                                        <b>{{claimRequest.policy.client.clientName}} Policy Details</b>
+                                    </h5>
+                                </div>
+                                <div class="panel-body">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <b>Client Information</b>
+                                                </div>
+                                                <div class="panel-body">
+
+                                                    <div class="form-group">
+                                                        <label>Intermediary </label> <input type="text"
+                                                                                            class="form-control" ng-model="claimRequest.policy.subAgent.broker.name"
+                                                                                            readonly />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>The Insured </label> <input type="text" class="form-control"
+                                                                                           ng-model="claimRequest.policy.client.clientName" readonly />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Policy Inception Date </label> <input type="text" class="form-control"
+                                                                                                     ng-model="claimRequest.policy.inceptionDate" readonly />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Subject Matter</label> <input type="text" class="form-control"
+                                                                                             ng-model="claimRequest.policy.subjectMatter" readonly />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Sum Insured </label> <input type="text" class="form-control"
+                                                                                           ng-model="claimRequest.policy.sumInsured" readonly />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Premium </label> <input type="text" class="form-control"
+                                                                                       ng-model="claimRequest.policy.premium" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <div class="panel-body">
+                                                <div id="accordion" class="panel-group">
+
+                                                    <div class="panel panel-default">
+
+                                                        <div class="panel-heading">
+
+                                                            <h4 class="panel-title">
+
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="/#collapse15">Claim History</a>
+
+                                                            </h4>
+
+                                                        </div>
+
+                                                        <div id="collapse15" class="panel-collapse collapse">
+
+                                                            <div class="panel-body">
+
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control"
+                                                                           ng-model="clientClaim"
+                                                                           placeholder="Search client claims"> <span
+                                                                           class="input-group-btn">
+                                                                        <button type="submit" class="btn btn-default">
+                                                                            <span class="glyphicon glyphicon-search"></span>
+                                                                        </button>
+                                                                    </span>
+                                                                </div>
+
+                                                                <div>          
+                                                                    <table class="table table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>#</th>
+                                                                                <th>Claim Number</th>
+                                                                                <th>Claim Type </th>
+                                                                                <th>Status</th>
+                                                                                <th>Claim</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody ng-repeat="clientClaim in clientClaims| filter:clientClaim">
+                                                                            <tr>
+                                                                                <td>{{$index + 1}}</td>
+                                                                                <td>{{clientClaim.claimNumber}}</td>
+                                                                                <td>{{clientClaim.claimType.claimType}}</td>
+                                                                                <td>{{clientClaim.status}}</td>
+                                                                                <td ng-if="clientClaim.status == 'Pending Documets'"><a role="button" class="btn btn-info" ng-href="#/claim-requests/{{clientClaim.claimNumber}}/claim">Claim</a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="panel panel-default">
+
+                                                        <div class="panel-heading">
+
+                                                            <h4 class="panel-title">
+
+                                                                <a data-toggle="collapse" data-parent="#accordion"
+                                                                   href="/#claimsAttachments">Claims documents for {{claimRequest.claimType.claimType}}</a>
+
+                                                            </h4>
+
+                                                        </div>
+
+                                                        <div id="claimsAttachments" class="panel-collapse collapse in">
+
+                                                            <div class="panel-body">
+
+                                                                <div>          
+                                                                    <table class="table table-striped">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Document Name</th>
+                                                                                <th>View</th>
+                                                                                <th>Download</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-if="claimRequest.investigationReportC != null">
+                                                                                <td>Investigation Report</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(investigationReportURL, investigationReportName)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(investigationReport, claimRequest.claimNumber, investigationReportName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.comfirmationAmountC != null">
+                                                                                <td>Confirmation Amount</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(comfirmationAmountURL, comfirmationAmountName)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(comfirmationAmount, claimRequest.claimNumber, comfirmationAmountName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.proofOfPickupC != null">
+                                                                                <td>Proof Of Pick Up</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(proofOfPickupURL, proofOfPickupName)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(proofOfPickup, claimRequest.claimNumber, proofOfPickupName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.affidavitC != null">
+                                                                                <td>Affidavit</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(affidavitURL, affidavitName)" ><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(affidavit, claimRequest.claimNumber, affidavitName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.amountBankedC != null">
+                                                                                <td>Amount Banked</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(amountBankedURL, amountBankedName)" ><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(amountBanked, claimRequest.claimNumber, amountBankedName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.transTrackDocumentC != null">
+                                                                                <td>Trans Track Document</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(transTrackDocumentURL, transTrackDocumentName)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(transTrackDocument, claimRequest.claimNumber, transTrackDocumentName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.quoteC != null">
+                                                                                <td>Quote</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(quoteURL, quoteName)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(quote, claimRequest.claimNumber, quoteName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.reportC != null">
+                                                                                <td>Report</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(reportURL, reportName)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(report, claimRequest.claimNumber, reportName)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.photo1C != null">
+                                                                                <td>Photo 1</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(photo1URL, photo1Name)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(photo1, claimRequest.claimNumber, photo1Name)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.photo2C != null">
+                                                                                <td>Photo 2</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(photo2URL, photo2Name)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(photo2, claimRequest.claimNumber, photo2Name)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.photo3C != null">
+                                                                                <td>Photo 3</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(photo3URL, photo3Name)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(photo3, claimRequest.claimNumber, photo3Name)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                            <tr ng-if="claimRequest.photo4C != null">
+                                                                                <td>Photo4</td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="toggleModal(photo4URL, photo4Name)"><span class="glyphicon glyphicon-eye-open"></span> view </a></td>
+                                                                                <td><a role="button" class="btn btn-default" ng-click="download(photo4, claimRequest.claimNumber, photo4Name)">
+                                                                                        <span class="glyphicon glyphicon-download-alt"></span> download </a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="panel panel-default">
+
+                                                    <div class="panel-heading">
+
+                                                        <h4 class="panel-title">
+
+                                                            <a data-toggle="collapse" data-parent="#accordion"
+                                                               href="/#collapse13">Indemnity Option</a>
+
+                                                        </h4>
+
+                                                    </div>
+
+                                                    <div id="collapse13" class="panel-collapse collapse in">
+
+                                                        <div class="panel-body">
+
+                                                            <div>          
+                                                                <table class="table table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Indemnity Option</th>
+                                                                            <th>Indemnity Value</th>
+                                                                            <th>Sum Insured</th>
+                                                                            <th>Premium</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="indemnity in claimRequest.policy.indemnityOption">
+                                                                            <td><input type="text" class="form-control"
+                                                                                       ng-model="indemnity.indemnityItemOption" readonly></td>
+                                                                            <td><input type="text" class="form-control"
+                                                                                       ng-model="indemnity.indemnityValue" readonly></td>
+                                                                            <td><input type="text" class="form-control"
+                                                                                       ng-model="indemnity.sumInsured" readonly></td>
+                                                                            <td><input type="text" class="form-control"
+                                                                                       ng-model="indemnity.premium" readonly></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                        <modal title="documentName" visible="showModal">
+                                            <div class="modal-body">
+                                                <div class="modal-content">
+                                                    <object data="{{attachment}}"
+                                                            style="width: 100%; height: 700px" ></object>
+                                                </div>
+                                            </div>
+                                        </modal>
+
+                                    </div>
+                                </div>
+
+
+
+								<!-- <div class="panel panel-default"
+                                     style="box-shadow: 0 0 30px #ffff;">
+                                    <div class="panel-heading">
+                                        <h5>
+                                            <b>Claim For {{claimRequest.policy.client.clientName}}</b>
+                                        </h5>
+                                    </div>-->
+
+                                    <div class="panel-body">
+
+                                        <div id="accordion" class="panel-group">
+
+                                            <div class="panel panel-default">
+
+                                                <div class="panel-heading">
+
+                                                    <h4 class="panel-title">
+
+                                                        <a data-toggle="collapse" data-parent="#accordion"
+                                                           href="/#collapse1">Claim Form</a>
+
+                                                    </h4>
+
+                                                </div>
+
+                                                <div id="collapse1" class="panel-collapse collapse in">
+
+                                                    <div class="panel-body">
+                                                        <div>
+                                                            <div class="form-group"
+                                                                 ng-repeat="claimQuestionnaire in claimRequest.claimQuestionnaire">
+                                                                <div ng-if="claimQuestionnaire.answer != null">
+                                                                    <label class="control-label" for="q_{{index}}">Q:
+                                                                        {{claimQuestionnaire.question}}</label>
+                                                                    <textarea class="form-control" id="q_{{index}}"
+                                                                              ng-model="claimQuestionnaire.answer" readonly="readonly"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            
+															<div class="form-group">
+																<label class="control-label" for="policyNumber">Policy Number</label>
+																<input type="text" class="form-control" ng-model="claimRequest.policy.reference" readonly>
+															</div>
+															<div class="form-group">
+																<label class="control-label" for="lessExcess">Less Excess</label>
+																	<div class="input-group">
+																		<span class="input-group-addon">R</span>
+																			<input type="text" class="form-control" ng-model="releaseForm.lessExcess" readonly>
+																	</div>
+															</div>
+															<div class="form-group">
+																<label class="control-label" for="totalPayable">Total Payable To Insured</label>
+																	<div class="input-group">
+																		<span class="input-group-addon">R</span>
+																			<input type="text" class="form-control" ng-model="releaseForm.totalPayeble" readonly>
+																	</div>
+															</div>
+															<div class="panel panel-default" ng-if="releaseFormPDF">
+
+                        										<div class="panel-heading">
+
+                            										<h4 class="panel-title">
+
+                                										<a data-toggle="collapse" data-parent="#accordion"
+                                   										href="/#collapseFive">ReleaseForm Preview</a>
+
+                            										</h4>
+
+                        										</div>
+
+                        										<div id="collapseFive" class="panel-collapse collapse">
+
+                            										<div class="panel-body">
+
+                                										<div class="modal-content">
+                                   											<object data="{{releaseFormPDF}}"
+                                            								style="width: 100%; height: 700px"></object>
+                                										</div>
+                            										</div>
+                        										</div>
+
+                    										</div>
+                                                        </div>
+                                                    </div>
+                                        </div>                                                                           
+                                    </div>
+                                </div>                                                       
+                     </div>   
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+
